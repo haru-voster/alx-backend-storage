@@ -9,7 +9,7 @@ from functools import wraps
     Writing strings to Redis.
 '''
 
-#harounbravo2@gmail.com   haru-voster
+
 def count_calls(method: Callable) -> Callable:
     '''
         Counts the number of times a method is called.
@@ -35,7 +35,7 @@ def call_history(method: Callable) -> Callable:
     outputs = key + ":outputs"
 
     @wraps(method)
-    def wrapper(self, *args, **kwargs): 
+    def wrapper(self, *args, **kwargs):  # haru-voster
         """ Wrapper for decorator functionality """
         self._redis.rpush(inputs, str(args))
         data = method(self, *args, **kwargs)
@@ -46,7 +46,7 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(method: Callable) -> None:
-    # sourcery skip: use-fstring-for-concatenation, use-fstring-for-formatting
+    # harounbravo2@gmail.com
     """
     Replays the history of a function
     Args:
@@ -98,7 +98,7 @@ class Cache:
 
     def get_str(self, key: str) -> str:
         '''
-            Get string from the cache.
+            Get a string from the cache.
         '''
         value = self._redis.get(key)
         return value.decode('utf-8')
